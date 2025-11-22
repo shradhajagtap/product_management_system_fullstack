@@ -8,7 +8,6 @@ from rest_framework.response import Response
 from rest_framework import status
 
 
-
 @login_required(login_url="login_url")
 def create_order(request):
     template_name = "curd_app/create.html"
@@ -18,10 +17,12 @@ def create_order(request):
         return redirect("show_url")
     return render(request, template_name, {"form": form})
 
+
 @login_required(login_url="login_url")
 def show_order(request):
     orders = ProductOrder.objects.all()
     return render(request, "curd_app/show.html", {"orders": orders})
+
 
 @login_required(login_url="login_url")
 def update_order(request, pk):
@@ -32,6 +33,7 @@ def update_order(request, pk):
         return redirect("show_url")
     return render(request, "curd_app/create.html", {"form": form})
 
+
 @login_required(login_url="login_url")
 def cancel_order(request, pk):
     order = get_object_or_404(ProductOrder, id=pk)
@@ -39,8 +41,6 @@ def cancel_order(request, pk):
         order.delete()
         return redirect("show_url")
     return render(request, "curd_app/confirm.html")
-
-
 
 
 @api_view(['GET', 'POST'])
