@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
-import AddProduct from "./components/AddProduct";
-import Show from "./components/Show";
+import Home from "./pages/Home";
+import AddProduct from "./pages/AddProduct";
+import Show from "./pages/Show";
 
 function App() {
   const [orders, setOrders] = useState([]);
@@ -26,9 +27,13 @@ function App() {
     <BrowserRouter>
       <Navbar />
       <Routes>
-        <Route path="/" element={<h2 style={{ textAlign: "center" }}>Home Page</h2>} />
+        <Route path="/" element={<Home />} />
         <Route path="/add" element={<AddProduct onAdded={fetchOrders} />} />
-        <Route path="/orders" element={<Show orders={orders} fetchOrders={fetchOrders} />} />      </Routes>
+        <Route
+          path="/orders"
+          element={<Show orders={orders} fetchOrders={fetchOrders} />}
+        />
+      </Routes>
     </BrowserRouter>
   );
 }
